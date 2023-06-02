@@ -19,7 +19,7 @@ MY_PASS = os.environ.get("MY_PASS", None)
 pass_dict = {}
 pass_db = Database(Var.DATABASE_URL, "ag_passwords")
 
-
+custom_caption = "{} \n Fast Download Link {} \n @TammuTV"
 
 
 @StreamBot.on_message((filters.private) & (filters.document | filters.video | filters.audio | filters.photo) , group=4)
@@ -65,15 +65,10 @@ async def channel_receive_handler(bot, broadcast):
             text=f"**Channel Name:** `{broadcast.chat.title}`\n**CHANNEL ID:** `{broadcast.chat.id}`\n**Rᴇǫᴜᴇsᴛ ᴜʀʟ:** {stream_link}",
             quote=True
         )
-        await bot.edit_message_reply_markup(
+        await bot.edit_message_caption(
             chat_id=broadcast.chat.id,
             message_id=broadcast.id,
-            reply_markup=InlineKeyboardMarkup(
-                [
-                    [InlineKeyboardButton("◉ sᴛʀᴇᴀᴍ ◉", url=stream_link),
-                     InlineKeyboardButton('● ᴅᴏᴡɴʟᴏᴀᴅ ●', url=online_link)] 
-                ]
-            )
+            caption=custom_caption.format(get_name(log_msg), online_link),
         )
     except FloodWait as w:
         print(f"Sleeping for {str(w.x)}s")
