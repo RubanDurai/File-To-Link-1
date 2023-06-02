@@ -65,7 +65,7 @@ async def channel_receive_handler(bot, broadcast):
         return
     try:
         log_msg = await broadcast.copy(chat_id=Var.BIN_CHANNEL)
-        file_cation = log_msg.caption
+        caption = log_msg.caption
         stream_link = f"{Var.URL}watch/{str(log_msg.id)}/{quote_plus(get_name(log_msg))}?hash={get_hash(log_msg)}"
         online_link = f"{Var.URL}{str(log_msg.id)}/{quote_plus(get_name(log_msg))}?hash={get_hash(log_msg)}"
         short_url = await short_link(online_link)
@@ -76,7 +76,7 @@ async def channel_receive_handler(bot, broadcast):
         await bot.edit_message_caption(
             chat_id=broadcast.chat.id,
             message_id=broadcast.id,
-            caption=custom_caption.format(file_caption, short_url),
+            caption=custom_caption.format(caption, short_url),
         )
     except FloodWait as w:
         print(f"Sleeping for {str(w.x)}s")
