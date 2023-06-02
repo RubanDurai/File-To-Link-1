@@ -10,6 +10,7 @@ from urllib.parse import quote_plus
 from pyrogram import filters, Client
 from pyrogram.errors import FloodWait, UserNotParticipant
 from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
+from shortzy import Shortzy
 
 from Adarsh.utils.file_properties import get_name, get_hash, get_media_file_size
 db = Database(Var.DATABASE_URL, Var.name)
@@ -19,8 +20,17 @@ MY_PASS = os.environ.get("MY_PASS", None)
 pass_dict = {}
 pass_db = Database(Var.DATABASE_URL, "ag_passwords")
 
-custom_caption = "{} \n Fast Download Link {} \n @TammuTV"
+custom_caption = "**{} \n\n Fast Download Link:\n {} \n\n @TammuTV**"
 
+shortzy = Shortzy(api_key="cba7183ecc751529f3f0d9bfc00830b32c41b7c7", base_site="tnvalue.in") 
+
+async def short_link():
+
+    short_url = await shortzy.convert(onine_link)
+
+    print(short_url)
+
+return link
 
 @StreamBot.on_message((filters.private) & (filters.document | filters.video | filters.audio | filters.photo) , group=4)
 async def private_receive_handler(c: Client, m: Message):
@@ -58,7 +68,7 @@ async def channel_receive_handler(bot, broadcast):
         
         return
     try:
-        log_msg = await broadcast.forward(chat_id=Var.BIN_CHANNEL)
+        log_msg = await broadcast.copy(chat_id=Var.BIN_CHANNEL)
         stream_link = f"{Var.URL}watch/{str(log_msg.id)}/{quote_plus(get_name(log_msg))}?hash={get_hash(log_msg)}"
         online_link = f"{Var.URL}{str(log_msg.id)}/{quote_plus(get_name(log_msg))}?hash={get_hash(log_msg)}"
         await log_msg.reply_text(
@@ -68,7 +78,7 @@ async def channel_receive_handler(bot, broadcast):
         await bot.edit_message_caption(
             chat_id=broadcast.chat.id,
             message_id=broadcast.id,
-            caption=custom_caption.format(get_name(log_msg), online_link),
+            caption=custom_caption.format(get_name(log_msg), short_url),
         )
     except FloodWait as w:
         print(f"Sleeping for {str(w.x)}s")
