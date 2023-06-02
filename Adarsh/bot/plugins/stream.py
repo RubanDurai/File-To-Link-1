@@ -25,12 +25,8 @@ custom_caption = "**{} \n\n Fast Download Link:\n {} \n\n @TammuTV**"
 shortzy = Shortzy(api_key="cba7183ecc751529f3f0d9bfc00830b32c41b7c7", base_site="tnvalue.in") 
 
 async def short_link():
-
-    short_url = await shortzy.convert(online_link)
-
-    print(short_url)
-
-    return short_url
+    link = await shortzy.convert(link)
+    return link
 
 @StreamBot.on_message((filters.private) & (filters.document | filters.video | filters.audio | filters.photo) , group=4)
 async def private_receive_handler(c: Client, m: Message):
@@ -71,6 +67,7 @@ async def channel_receive_handler(bot, broadcast):
         log_msg = await broadcast.copy(chat_id=Var.BIN_CHANNEL)
         stream_link = f"{Var.URL}watch/{str(log_msg.id)}/{quote_plus(get_name(log_msg))}?hash={get_hash(log_msg)}"
         online_link = f"{Var.URL}{str(log_msg.id)}/{quote_plus(get_name(log_msg))}?hash={get_hash(log_msg)}"
+        short_url = await short_link(online_link)
         await log_msg.reply_text(
             text=f"**Channel Name:** `{broadcast.chat.title}`\n**CHANNEL ID:** `{broadcast.chat.id}`\n**Rᴇǫᴜᴇsᴛ ᴜʀʟ:** {stream_link}",
             quote=True
