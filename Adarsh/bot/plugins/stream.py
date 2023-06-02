@@ -26,11 +26,11 @@ shortzy = Shortzy(api_key="cba7183ecc751529f3f0d9bfc00830b32c41b7c7", base_site=
 
 async def short_link():
 
-    short_url = await shortzy.convert(onine_link)
+    short_url = await shortzy.convert(online_link)
 
     print(short_url)
 
-return link
+    return short_url
 
 @StreamBot.on_message((filters.private) & (filters.document | filters.video | filters.audio | filters.photo) , group=4)
 async def private_receive_handler(c: Client, m: Message):
