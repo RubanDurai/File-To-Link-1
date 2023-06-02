@@ -24,7 +24,7 @@ custom_caption = "**{} \n\n Fast Download Link:\n {} \n\n @TammuTV**"
 
 shortzy = Shortzy(api_key="cba7183ecc751529f3f0d9bfc00830b32c41b7c7", base_site="tnvalue.in") 
 
-async def short_link():
+async def short_link(link):
     link = await shortzy.convert(link)
     return link
 
