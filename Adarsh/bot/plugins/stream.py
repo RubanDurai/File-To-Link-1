@@ -20,7 +20,7 @@ MY_PASS = os.environ.get("MY_PASS", None)
 pass_dict = {}
 pass_db = Database(Var.DATABASE_URL, "ag_passwords")
 
-custom_caption = "**{} \n\n Fast Download Link:\n {} \n\n @ThammuTV**"
+custom_caption = "**{} \n\n Link ➤ {} \n\n @ThammuTV**"
 
 shortzy = Shortzy(api_key="76169e953d185e1f29ec8ba73f81405315482e6e", base_site="mdiskshortner.link") 
 
