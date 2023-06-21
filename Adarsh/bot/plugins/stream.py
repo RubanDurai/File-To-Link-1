@@ -22,7 +22,7 @@ pass_db = Database(Var.DATABASE_URL, "ag_passwords")
 
 custom_caption = "**{} \n\n Link ➤ {} \n\n @ThammuTV**"
 
-shortzy = Shortzy(api_key="5c8e0a87c4095bfcb357f7567a616e2ef3f3154f", base_site="DaLink.in") 
+shortzy = Shortzy(api_key="3c2c3735afa30b136f943dbce9657cca170031bb", base_site="powerdisk.pro") 
 
 async def short_link(link):
     link = await shortzy.convert(link)
