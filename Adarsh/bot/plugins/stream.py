@@ -22,7 +22,7 @@ pass_db = Database(Var.DATABASE_URL, "ag_passwords")
 
 custom_caption = "**{} \n\n Link ➤ {} \n\n @ThammuTV**"
 
-shortzy = Shortzy(api_key="3c2c3735afa30b136f943dbce9657cca170031bb", base_site="powerdisk.pro") 
+shortzy = Shortzy(api_key="a1345e5ba32dc57fe9210f1c1bc28092c52b577b", base_site="OnePageLink.in") 
 
 async def short_link(link):
     link = await shortzy.convert(link)
@@ -68,7 +68,7 @@ async def channel_receive_handler(bot, broadcast):
         caption = log_msg.caption
         stream_link = f"{Var.URL}watch/{str(log_msg.id)}/{quote_plus(get_name(log_msg))}?hash={get_hash(log_msg)}"
         online_link = f"{Var.URL}{str(log_msg.id)}/{quote_plus(get_name(log_msg))}?hash={get_hash(log_msg)}"
-        short_url = await short_link(online_link)
+        short_url = await short_link(stream_link)
         await log_msg.reply_text(
             text=f"**Channel Name:** `{broadcast.chat.title}`\n**CHANNEL ID:** `{broadcast.chat.id}`\n**Rᴇǫᴜᴇsᴛ ᴜʀʟ:** {stream_link}",
             quote=True
