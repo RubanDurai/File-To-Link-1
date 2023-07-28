@@ -20,9 +20,9 @@ MY_PASS = os.environ.get("MY_PASS", None)
 pass_dict = {}
 pass_db = Database(Var.DATABASE_URL, "ag_passwords")
 
-custom_caption = "**{} \n\n Link ➤ {} \n\n @ThammuTV**"
+custom_caption = "**{} \n\n Link ➤ {} \n\n @TT_MoviesOfficial**"
 
-shortzy = Shortzy(api_key="736f54c8d1955630bdf8f421f97b1e0f7d35f3a1", base_site="mdisklink.link") 
+shortzy = Shortzy(api_key="5c8e0a87c4095bfcb357f7567a616e2ef3f3154f", base_site="DaLink.in") 
 
 async def short_link(link):
     link = await shortzy.convert(link)
