@@ -18,7 +18,7 @@ async def render_page(id, secure_hash):
     src = urllib.parse.urljoin(Var.URL, f'{secure_hash}{str(id)}')
     if str(file_data.mime_type.split('/')[0].strip()) == 'video':
         async with aiofiles.open('Adarsh/template/req.html') as r:
-            heading = 'Watch {}'.format(file_data.caption)
+            heading = 'Watch {}'.format(file_data.file_name)
             tag = file_data.mime_type.split('/')[0].strip()
             html = (await r.read()).replace('tag', tag) % (heading, file_data.caption, src)
     elif str(file_data.mime_type.split('/')[0].strip()) == 'audio':
