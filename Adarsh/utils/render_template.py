@@ -8,7 +8,6 @@ import aiofiles
 import logging
 import aiohttp
 
-
 async def render_page(id, secure_hash):
     file_data=await get_file_ids(StreamBot, int(Var.BIN_CHANNEL), int(id))
     if file_data.unique_id[:6] != secure_hash:
@@ -20,7 +19,7 @@ async def render_page(id, secure_hash):
         async with aiofiles.open('Adarsh/template/req.html') as r:
             heading = 'Watch {}'.format(file_data.file_name)
             tag = file_data.mime_type.split('/')[0].strip()
-            html = (await r.read()).replace('tag', tag) % (heading, file_data.caption, src)
+            html = (await r.read()).replace('tag', tag) % (heading, file_data.file_name, src)
     elif str(file_data.mime_type.split('/')[0].strip()) == 'audio':
         async with aiofiles.open('Adarsh/template/req.html') as r:
             heading = 'Listen {}'.format(file_data.file_name)
